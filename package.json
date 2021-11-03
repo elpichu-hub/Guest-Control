@@ -2,6 +2,9 @@
   "name": "guest-registry",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "16.x"
+  },
   "dependencies": {
     "@coreui/coreui": "^4.0.5",
     "@coreui/react": "^4.0.0-rc.5",

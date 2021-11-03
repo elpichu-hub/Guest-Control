@@ -1,1 +1,2 @@
-web:gunicron dar_project.wsgi
+release: python manage.py migrate
+web: gunicorn guest_registry.wsgi

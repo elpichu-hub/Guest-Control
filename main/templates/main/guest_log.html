@@ -1,0 +1,34 @@
+{% extends 'main/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<div class="container my-5 my_background">
+    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+
+        <div class="col-10 mx-auto col-lg-5 login-container">
+
+            <form class="p-5 border rounded-3 bg-light my-5" method="POST">
+                <legend>Lorem ipsum dolor sit amet.</legend>
+                <hr>
+                {% csrf_token %}
+
+                {{form|crispy}}
+                
+                <hr class="my-4">
+
+                <div class="mx-auto" style="width: 300px;">
+                    <a href=" {% url 'home' %} "><button type="button" class="btn btn-secondary me-5">Go Back</button></a>
+                    <button type="submit" class="btn btn-success ms-5">Log Guest</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}

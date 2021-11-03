@@ -1,0 +1,68 @@
+{% extends 'main/base.html' %}
+
+{% load crispy_forms_tags %}
+
+
+
+{% block content %}
+
+
+<div class="container my-5 my_background">
+    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+        <div style="height: 320px; overflow-y: scroll;">
+            <h5>Ready to search by...</h5>
+            <hr class="my-4">
+            <br>
+            {% if query_results %}
+            {% for query in query_results %}
+            <ul>
+                <a href=" {% url 'house-residents' unit=query.unit %} ">
+                    <h4>{{query.unit}} - {{query.resident_first_name}} {{query.resident_last_name}} - {{query.address}}
+                        - {{query.resident_phone}}</h4>
+                </a>
+            </ul>
+            {% endfor %}
+            {% endif %}
+            {% if query_results_guest %}
+            {% for query in query_results_guest %}
+            <ul>
+                
+                    <a href="{% url 'guest-log' pk=query.pk %}">
+                        <h4>{{query.unit}} - {{query.guest_last_name}} {{query.guest_first_name}} -
+                            {{query.address_visiting}}</h4>
+                    </a>
+                
+            </ul>
+            {% endfor %}
+            {% endif %}
+
+        </div>
+        <hr>
+
+
+
+
+
+
+
+
+        <div class="col-10 mx-auto col-lg-5 login-container">
+
+
+
+
+            <form method="POST">
+                {% csrf_token %}
+                <br><br><br><br>
+                {{form|crispy}}
+
+                <div class="mx-auto" style="width: 300px;">
+                    <button style="width: 100%;" class="btn btn-success  mb-5 mt-5" type="submit">Search</button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+
+    {% endblock content %}

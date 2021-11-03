@@ -1,0 +1,9 @@
+.QueryResultsTopDiv {
+    border-bottom: 1px solid wheat;
+    display: flex;
+    flex-direction: column;
+    min-height: 471px;
+    max-height: 471px;
+    align-items: center;
+    justify-content: flex-start;
+}

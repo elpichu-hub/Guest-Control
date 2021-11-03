@@ -1,0 +1,51 @@
+tr {
+    
+    border: 1px solid black;
+}
+
+th {
+    padding-right: 50px;
+    
+    border: 1px solid black;
+}
+
+td {
+    border: 1px solid black;
+}
+
+table {
+    border: 1px solid black;
+    
+}
+
+.tableDivision {
+    background-color: rgb(31, 182, 209);
+    height: 300px;
+    overflow-y: auto;
+    
+}
+
+#showTableButton {
+    align-self: center;
+    height: 71.328px;
+}
+
+.ButtonsGuestLogs {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.ButtonsGuestLogs button {
+    width: 200px ;
+}
+
+#logsInput {
+    font-size: 25px;
+    background-color: rgb(31, 182, 209);
+    align-self: center;
+}
+
+
+

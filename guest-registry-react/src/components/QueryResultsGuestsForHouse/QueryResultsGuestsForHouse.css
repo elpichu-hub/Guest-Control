@@ -1,0 +1,12 @@
+.addNewGuest {
+    min-height: 41px;
+    background-color: rgb(28, 158, 39);
+    cursor: pointer;
+    border: 1px solid green;
+    display: flex;
+    align-items: center;
+    min-width: 550px;
+    max-width: 550px;
+    margin-top: 8px;
+    justify-content: center;
+}

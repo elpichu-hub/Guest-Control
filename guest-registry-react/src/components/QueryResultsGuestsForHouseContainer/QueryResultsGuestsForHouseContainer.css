@@ -1,0 +1,29 @@
+.QueryResultsGuests p{
+    font-family: 'Roboto Slab', serif;
+    margin-bottom: 0;
+    margin-left: 100px; 
+}
+
+
+.QueryResultsGuests {
+    min-height: 41px;
+    background-color: skyblue;
+    cursor: pointer;
+    border: 1px solid green;
+    display: flex;
+    align-items: center;
+    min-width: 550px;
+    max-width: 550px;
+    margin-top: 8px;
+}
+
+
+.QueryResultsTopDiv {
+    border-bottom: 1px solid wheat;
+    display: flex;
+    flex-direction: column;
+    min-height: 471px;
+    max-height: 471px;
+    align-items: center;
+    justify-content: flex-start;
+}

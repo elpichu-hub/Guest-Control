@@ -1,0 +1,21 @@
+.QueryResultsResidents p{
+    font-family: 'Roboto Slab', serif;
+    margin-bottom: 0;
+    margin-left: 100px;
+    
+    
+    
+}
+
+
+.QueryResultsResidents {
+    min-height: 41px;
+    background-color: skyblue;
+    cursor: pointer;
+    border: 1px solid green;
+    display: flex;
+    align-items: center;
+    min-width: 550px;
+    max-width: 550px;
+    margin-top: 8px;
+}

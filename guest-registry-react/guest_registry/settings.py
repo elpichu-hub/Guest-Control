@@ -64,7 +64,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'guest-registry-react/build')
+            os.path.join(BASE_DIR, 'build')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -77,6 +77,7 @@ TEMPLATES = [
         },
     },
 ]
+print(BASE_DIR)
 
 WSGI_APPLICATION = 'guest_registry.wsgi.application'
 
@@ -140,7 +141,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'guest-registry-react/build/static')
+    os.path.join(BASE_DIR, 'build/static')
 ]
 
 

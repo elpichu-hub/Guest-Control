@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-nunj0n0m!u=tdz1h3z^z7-f#886k$1bbdz1yk=+bjg_3hsj%hr
 DEBUG = True
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://guestentryapp.herokuapp.com/react']
 
 
 # Application definition
@@ -47,14 +47,18 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
+
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware'
+    
 
 ]
 
@@ -77,7 +81,7 @@ TEMPLATES = [
         },
     },
 ]
-print(BASE_DIR)
+
 
 WSGI_APPLICATION = 'guest_registry.wsgi.application'
 
@@ -149,6 +153,7 @@ CORS_ORIGIN_WHITELIST = [
     'http://127.0.0.1:8000',
     'http://127.0.0.1:3000',
     'http://localhost:3000',
+    
 ]
 
 

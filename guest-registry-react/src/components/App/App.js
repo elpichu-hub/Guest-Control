@@ -118,10 +118,11 @@ function App() {
     if (searchBy !== 'Guest') {
       const getQueryResults = async () => {
         try {
-          const response = await fetch(`http://127.0.0.1:8000/react/list/resident?search=${inputText}`, {
+          const response = await fetch(`https://guestentryapp.herokuapp.com/react/list/resident?search=${inputText}`, {
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': 'Token e84a77b7873b750742ef6810b7f5a367e3591c9f',
+              
+              'Authorization': 'Token 6b51eb604cbc16942b1f38978ed501090d61d3fd',
             }
           })
           if (response.ok) {
@@ -144,10 +145,10 @@ function App() {
     } else {
       const getQueryResults = async () => {
         try {
-          const response = await fetch(`http://127.0.0.1:8000/react/list/guest?search=${inputText}`, {
+          const response = await fetch(`https://guestentryapp.herokuapp.com/react/list/guest?search=${inputText}`, {
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': 'Token e84a77b7873b750742ef6810b7f5a367e3591c9f',
+              'Authorization': 'Token 6b51eb604cbc16942b1f38978ed501090d61d3fd',
             }
           })
           if (response.ok) {
@@ -177,10 +178,10 @@ function App() {
   // this function will get all the guest for that residents house;
   const getGuestsForAddress = async (address) => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/react/list/guest?search=${address}`, {
+      const response = await fetch(`https://guestentryapp.herokuapp.com/react/list/guest?search=${address}`, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Token e84a77b7873b750742ef6810b7f5a367e3591c9f',
+          'Authorization': 'Token 6b51eb604cbc16942b1f38978ed501090d61d3fd',
         }
       })
       if (response.ok) {
@@ -268,12 +269,12 @@ function App() {
   // will make a POST request to the data base using the data gathered with getGuestInfoClick()
   const createGuestLog = async (guestData) => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/react/create/guestlog/", {
+      const response = await fetch("https://guestentryapp.herokuapp.com/react/create/guestlog/", {
         method: 'POST',
         body: JSON.stringify(guestData),
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Token e84a77b7873b750742ef6810b7f5a367e3591c9f',
+          'Authorization': 'Token 6b51eb604cbc16942b1f38978ed501090d61d3fd',
         }
       })
 

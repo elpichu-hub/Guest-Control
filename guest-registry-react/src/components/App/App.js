@@ -269,7 +269,7 @@ function App() {
   // will make a POST request to the data base using the data gathered with getGuestInfoClick()
   const createGuestLog = async (guestData) => {
     try {
-      const response = await fetch("https://guestentryapp.herokuapp.com/react/create/guestlog", {
+      const response = await fetch("http://guestentryapp.herokuapp.com/react/create/guestlog", {
         method: 'POST',
         body: JSON.stringify(guestData),
         headers: {

@@ -274,6 +274,7 @@ function App() {
         body: JSON.stringify(guestData),
         headers: {
           'Content-Type': 'application/json',
+          'Transfer-Encoding': 'chunked',
           'Authorization': 'Token 6b51eb604cbc16942b1f38978ed501090d61d3fd',
         }
       })

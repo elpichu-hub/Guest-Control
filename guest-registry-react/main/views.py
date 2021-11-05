@@ -114,8 +114,10 @@ class GuestLogAPICreateView(generics.CreateAPIView):
         resident_to_notify = Resident.objects.filter(
             address__iexact=address_to_visit)
         
-        special_note = request.data['special_note']
-
+        if request.data['special_note']:
+            special_note = request.data['special_note']
+        else:
+            special_note = ''
         subject = 'Guest allowed to visit your property'
         message = f"""
             Please be advised that on {date_and_time}, {visitor_first_name} {visitor_last_name}

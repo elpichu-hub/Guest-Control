@@ -113,6 +113,7 @@ class GuestLogAPICreateView(generics.CreateAPIView):
         date_and_time = datetime.today().strftime("%m/%d/%Y - %I:%M %p")
         resident_to_notify = Resident.objects.filter(
             address__iexact=address_to_visit)
+        
         special_note = request.data['special_note']
 
         subject = 'Guest allowed to visit your property'

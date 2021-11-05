@@ -54,7 +54,7 @@ class GuestLog(models.Model):
     address = models.CharField(max_length=100, default=None)
     last_name = models.CharField(max_length=100, default=None)
     first_name = models.CharField(max_length=100, default=None)
-    special_note = models.TextField(max_length=100, blank=True, null=True, default=None)
+    special_note = models.TextField(max_length=100, blank=True, null=True, default='No Additional Comments')
     company = models.CharField(max_length=50, blank=True)
     vehicle = models.CharField(max_length=20, default=None)
     plate = models.CharField(max_length=20, default=None)

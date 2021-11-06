@@ -247,6 +247,7 @@ function App() {
   const logNewGuestNotInGuestListClick = () => {
     const data = {
       address: addressToLogNewGuest,
+      special_note: null
     }
 
     setGuestData(data)

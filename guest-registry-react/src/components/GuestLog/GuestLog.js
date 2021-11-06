@@ -19,7 +19,7 @@ const GuestLog = () => {
                 const response = await fetch(`https://guestentryapp.herokuapp.com/react/list/guestlog?search=${guestLogsCustom}`, {
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'Token f602aaca854c42b570fdcafe3bb2bca95009b902',
+                        'Authorization': 'Token 09f3a37a78991b0a86ccd07329f991d908b0ce5e',
                       }
                 });
                 if (response.ok) {
@@ -44,7 +44,7 @@ const GuestLog = () => {
             const response = await fetch(`https://guestentryapp.herokuapp.com/react/list/guestlog?search=${guestLogsCustom}`, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Token f602aaca854c42b570fdcafe3bb2bca95009b902',
+                    'Authorization': 'Token 09f3a37a78991b0a86ccd07329f991d908b0ce5e',
                   }
             });
             if (response.ok) {

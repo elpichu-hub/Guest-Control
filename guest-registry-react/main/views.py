@@ -124,11 +124,11 @@ class GuestLogAPICreateView(generics.CreateAPIView):
             was allowed into your property. {special_note} Please call us at 0000000000 if you have any questions.
             Thanks
          """
-        #for resident in resident_to_notify:
-         #   send_mail(subject=subject,
-          #            message=message,
-           #           from_email=settings.EMAIL_HOST_PASSWORD,
-            #          recipient_list=[resident.email])
+        for resident in resident_to_notify:
+            send_mail(subject=subject,
+                      message=message,
+                      from_email=settings.EMAIL_HOST_PASSWORD,
+                      recipient_list=[resident.email])
 
         return response
 
@@ -140,3 +140,6 @@ class GuestLogAPIListView(generics.ListAPIView):
     filter_backends = [filters.SearchFilter]
     search_fields = ['$address', '^company', '^plate',
                      '^vehicle', '^last_name', '^first_name']
+
+
+

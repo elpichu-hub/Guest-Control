@@ -16,6 +16,7 @@ const GuestLogTable = ({guestLogs}) => {
                 </tr>
                 {Object.values(guestLogs).map((log, index) => (
                     <tr key={index}>
+                                   
                         <td>{log.first_name}</td>
                         <td>{log.last_name}</td>
                         <td>{log.address}</td>

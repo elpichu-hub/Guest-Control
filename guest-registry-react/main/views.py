@@ -111,39 +111,33 @@ class GuestLogAPICreateView(generics.CreateAPIView):
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
 
-        self.residents_to_notify_info.update(
+        residents_to_notify_info.update(
             {'address_to_visit': request.data['address']})
-        self.residents_to_notify_info.update(
+        residents_to_notify_info.update(
             {'visitor_first_name': request.data['first_name']})
-        self.residents_to_notify_info.update(
+        residents_to_notify_info.update(
             {'visitor_last_name': request.data['last_name']})
-        self.residents_to_notify_info.update(
+        residents_to_notify_info.update(
             {'date_and_time': datetime.today().strftime("%m/%d/%Y - %I:%M %p")})
 
 
         resident_to_notify = Resident.objects.filter(
-            address__iexact=self.residents_to_notify_info['address_to_visit'])
+            address__iexact=residents_to_notify_info['address_to_visit'])
 
         for resident in resident_to_notify:
             list_of_emails.append(resident.email)
 
 
         if request.data['special_note']:
-            self.residents_to_notify_info.update(
+            residents_to_notify_info.update(
                 {'special_note': request.data['special_note']})
         else:
-            self.residents_to_notify_info.update({'special_note': ''})
+            residents_to_notify_info.update({'special_note': ''})
 
-        subject = 'Guest allowed to visit your property'
-        message = f"""
-            Please be advised that on {self.residents_to_notify_info['date_and_time']}, {self.residents_to_notify_info['visitor_first_name']}
-             {self.residents_to_notify_info['visitor_last_name']}
-            was allowed into your property. {self.residents_to_notify_info['special_note']} Please call us at 0000000000 if you have any questions.
-            Thanks
-         """
+        
 
         return response
-    
+
 
 
     

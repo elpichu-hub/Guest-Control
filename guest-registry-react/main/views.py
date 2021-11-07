@@ -7,7 +7,10 @@ from rest_framework.permissions import IsAuthenticated
 from django.conf import settings
 from django.core.mail import send_mail
 from datetime import datetime
-import asyncio
+
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 
 
 # Django Version of the project
@@ -94,14 +97,17 @@ class GuestListAPIView(generics.ListAPIView):
                      '^guest_first_name', '$address_visiting']
 
 
+
+residents_to_notify_info = {}
+list_of_emails = []
 class GuestLogAPICreateView(generics.CreateAPIView):
     permission_classes = (IsAuthenticated, )
     queryset = GuestLog.objects.all()
     serializer_class = GuestLogSerializer
-    residents_to_notify_info = {}
-
+    
 
     # in order to send an email when you log 'post' a guest, you need to override the post method like this:
+
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
 
@@ -114,12 +120,13 @@ class GuestLogAPICreateView(generics.CreateAPIView):
         self.residents_to_notify_info.update(
             {'date_and_time': datetime.today().strftime("%m/%d/%Y - %I:%M %p")})
 
+
         resident_to_notify = Resident.objects.filter(
             address__iexact=self.residents_to_notify_info['address_to_visit'])
 
-        list_of_emails = []
         for resident in resident_to_notify:
             list_of_emails.append(resident.email)
+
 
         if request.data['special_note']:
             self.residents_to_notify_info.update(
@@ -134,20 +141,12 @@ class GuestLogAPICreateView(generics.CreateAPIView):
             was allowed into your property. {self.residents_to_notify_info['special_note']} Please call us at 0000000000 if you have any questions.
             Thanks
          """
-        async def send_emails():
-            print('async func just fired')
-            task = asyncio.create_task(send_bunch())
 
-        async def send_bunch():
-            print('hello2')
-        asyncio.run(send_emails())
-        
         return response
     
 
-    
-    
 
+    
 
 
 class GuestLogAPIListView(generics.ListAPIView):

@@ -8,6 +8,10 @@ from django.conf import settings
 from django.core.mail import send_mail
 from datetime import datetime
 
+from django.db.models.signals import post_save
+from .models import GuestLog
+from django.dispatch import receiver
+
 
 # Django Version of the project
 
@@ -65,12 +69,7 @@ def guest_list_for_house(request, unit):
     return render(request, 'main/guest_list_for_house.html', context)
 
 
-
-
-
-
-
-####react version
+# react version
 
 class HouseListAPIView(generics.ListAPIView):
     permission_classes = (IsAuthenticated, )
@@ -102,35 +101,41 @@ class GuestLogAPICreateView(generics.CreateAPIView):
     permission_classes = (IsAuthenticated, )
     queryset = GuestLog.objects.all()
     serializer_class = GuestLogSerializer
-
+    residents_to_notify_info = {}
+    
     # in order to send an email when you log 'post' a guest, you need to override the post method like this:
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
 
-        address_to_visit = request.data['address']
-        visitor_first_name = request.data['first_name']
-        visitor_last_name = request.data['last_name']
-        date_and_time = datetime.today().strftime("%m/%d/%Y - %I:%M %p")
+        self.residents_to_notify_info.update({'address_to_visit': request.data['address']})
+        self.residents_to_notify_info.update({'visitor_first_name': request.data['first_name']})
+        self.residents_to_notify_info.update({'visitor_last_name': request.data['last_name']})
+        self.residents_to_notify_info.update({'date_and_time': datetime.today().strftime("%m/%d/%Y - %I:%M %p")})
+
         resident_to_notify = Resident.objects.filter(
-            address__iexact=address_to_visit)
+            address__iexact=self.residents_to_notify_info['address_to_visit'])
+
+        list_of_emails = []
+        for resident in resident_to_notify:
+            list_of_emails.append(resident.email)
         
+            
+        
+
         if request.data['special_note']:
             special_note = request.data['special_note']
         else:
             special_note = ''
         subject = 'Guest allowed to visit your property'
-        message = f"""
-            Please be advised that on {date_and_time}, {visitor_first_name} {visitor_last_name}
-            was allowed into your property. {special_note} Please call us at 0000000000 if you have any questions.
-            Thanks
-         """
-        #for resident in resident_to_notify:
-        #    send_mail(subject=subject,
-        #              message=message,
-        #              from_email=settings.EMAIL_HOST_PASSWORD,
-        #              recipient_list=[resident.email])
-
+        
+        
+        
         return response
+
+    @receiver(post_save, sender=GuestLog)
+    def create_signal(sender, instance, created, **kwargs):
+        
+            return
 
 
 class GuestLogAPIListView(generics.ListAPIView):
@@ -140,6 +145,3 @@ class GuestLogAPIListView(generics.ListAPIView):
     filter_backends = [filters.SearchFilter]
     search_fields = ['$address', '^company', '^plate',
                      '^vehicle', '^last_name', '^first_name']
-
-
-

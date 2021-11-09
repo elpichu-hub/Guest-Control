@@ -23,6 +23,7 @@ urlpatterns = [
 
     path('react',  TemplateView.as_view(template_name='index.html'), name='react'),
     
+
     path('react/list/house/', main_views.HouseListAPIView.as_view(), name='react-list-house'),
     path('react/list/resident/', main_views.ResidentListAPIView.as_view(), name='react-list-resident'),
     path('react/list/guest/', main_views.GuestListAPIView.as_view(), name='react-list-guest'),

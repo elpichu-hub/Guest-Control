@@ -16,10 +16,10 @@ const GuestLog = () => {
     useEffect(() => {
         const getGuestLogCustomized = async () => {
             try {
-                const response = await fetch(`https://guestentryapp.herokuapp.com/react/list/guestlog?search=${guestLogsCustom}`, {
+                const response = await fetch(`http://127.0.0.1:8000/react/list/guestlog?search=${guestLogsCustom}`, {
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'Token 09f3a37a78991b0a86ccd07329f991d908b0ce5e',
+                        'Authorization': 'Token 72e2f76284aa92d0d2eda68192c98072195eaf0c',
                       }
                 });
                 if (response.ok) {
@@ -41,10 +41,10 @@ const GuestLog = () => {
 
     const getGuestLogCustomizedClick = async () => {
         try {
-            const response = await fetch(`https://guestentryapp.herokuapp.com/react/list/guestlog?search=${guestLogsCustom}`, {
+            const response = await fetch(`http://127.0.0.1:8000/react/list/guestlog?search=${guestLogsCustom}`, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Token 09f3a37a78991b0a86ccd07329f991d908b0ce5e',
+                    'Authorization': 'Token 72e2f76284aa92d0d2eda68192c98072195eaf0c',
                   }
             });
             if (response.ok) {

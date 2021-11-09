@@ -20,10 +20,6 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', main_views.home, name='home'),
-    path('guest-log/<int:pk>/', main_views.guest_log, name='guest-log'),
-    path('house-residents/<str:unit>/', main_views.house_residents, name='house-residents'),
-    path('guest-list-for-house/<str:unit>/', main_views.guest_list_for_house, name='guest-list-for-house'),
 
     path('react',  TemplateView.as_view(template_name='index.html'), name='react'),
     

@@ -301,10 +301,10 @@ function App() {
   const createGuestLogClick = (guestData, setError) => {
 
     if (guestData.first_name && guestData.last_name && guestData.address && guestData.vehicle && guestData.plate) {
-      createGuestLog(guestData);
       setShowForm(false);
-
       setShowGuestLogMessage(true)
+      createGuestLog(guestData);
+      
       setInputText('')
 
       document.getElementById('input-for-search').focus()

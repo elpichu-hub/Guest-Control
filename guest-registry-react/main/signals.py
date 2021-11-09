@@ -9,11 +9,8 @@ from django.core.mail import send_mail
 @receiver(post_save, sender=GuestLog)
 def create_signal(sender, instance, created, **kwargs):
     if created:
-        subject = 'Guest allowed to visit your property'
         
-        print(residents_to_notify_info)
-        send_mail(subject=subject,
-                  message=message,
-                  from_email=settings.EMAIL_HOST_USER,
-                  recipient_list=list_of_emails)
-        print('worked')
+        
+        new_log = GuestLog.objects.last()
+        
+        print(new_log)

@@ -12,7 +12,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
-
 # Django Version of the project
 
 def home(request):
@@ -97,14 +96,14 @@ class GuestListAPIView(generics.ListAPIView):
                      '^guest_first_name', '$address_visiting']
 
 
-
 residents_to_notify_info = {}
 list_of_emails = []
+
+
 class GuestLogAPICreateView(generics.CreateAPIView):
     permission_classes = (IsAuthenticated, )
     queryset = GuestLog.objects.all()
     serializer_class = GuestLogSerializer
-    
 
     # in order to send an email when you log 'post' a guest, you need to override the post method like this:
 
@@ -120,13 +119,11 @@ class GuestLogAPICreateView(generics.CreateAPIView):
         residents_to_notify_info.update(
             {'date_and_time': datetime.today().strftime("%m/%d/%Y - %I:%M %p")})
 
-
         resident_to_notify = Resident.objects.filter(
             address__iexact=residents_to_notify_info['address_to_visit'])
 
         for resident in resident_to_notify:
             list_of_emails.append(resident.email)
-
 
         if request.data['special_note']:
             residents_to_notify_info.update(
@@ -134,14 +131,8 @@ class GuestLogAPICreateView(generics.CreateAPIView):
         else:
             residents_to_notify_info.update({'special_note': ''})
 
-        
-
         return response
-
-
-
     
-
 
 class GuestLogAPIListView(generics.ListAPIView):
     permission_classes = (IsAuthenticated, )

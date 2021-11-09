@@ -11,16 +11,17 @@ const GuestLog = () => {
     const [guestLogsCustom, setGuestLogsCustom] = useState('')
     const [showTable, setShowTable] = useState(false)
 
-
+    const developmentToken = 'Token 72e2f76284aa92d0d2eda68192c98072195eaf0c';
+    const productionToken = 'Token 09f3a37a78991b0a86ccd07329f991d908b0ce5e';
 
     useEffect(() => {
         const getGuestLogCustomized = async () => {
             try {
-                const response = await fetch(`http://127.0.0.1:8000/react/list/guestlog?search=${guestLogsCustom}`, {
+                const response = await fetch(`https://guestentryapp.herokuapp.com/react/list/guestlog?search=${guestLogsCustom}`, {
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'Token 72e2f76284aa92d0d2eda68192c98072195eaf0c',
-                      }
+                        'Authorization': productionToken,
+                    }
                 });
                 if (response.ok) {
                     const jsonResponse = await response.json();
@@ -41,11 +42,11 @@ const GuestLog = () => {
 
     const getGuestLogCustomizedClick = async () => {
         try {
-            const response = await fetch(`http://127.0.0.1:8000/react/list/guestlog?search=${guestLogsCustom}`, {
+            const response = await fetch(`https://guestentryapp.herokuapp.com/react/list/guestlog?search=${guestLogsCustom}`, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Token 72e2f76284aa92d0d2eda68192c98072195eaf0c',
-                  }
+                    'Authorization': productionToken,
+                }
             });
             if (response.ok) {
                 const jsonResponse = await response.json();
@@ -72,10 +73,10 @@ const GuestLog = () => {
                 <button type="button" className="btn btn-secondary" onClick={getGuestLogCustomizedClick}
                     id='showTableButton'>Show Guest Logs</button>
 
-                <input value={guestLogsCustom} onChange={(e) => {handleOnChangeForGuestLogs(e)}}
+                <input value={guestLogsCustom} onChange={(e) => { handleOnChangeForGuestLogs(e) }}
                     id='logsInput' placeholder='Search By..' />
 
-                
+
 
             </div>
             {showTable ? <GuestLogTable guestLogs={guestLogs} /> : null}

@@ -111,18 +111,19 @@ function App() {
 
 
 
-
+  const developmentToken = 'Token 72e2f76284aa92d0d2eda68192c98072195eaf0c';
+  const productionToken = 'Token 09f3a37a78991b0a86ccd07329f991d908b0ce5e';
   // if 'searchBy or inputText' and inputText === true, getQueryResults() will be called, there is endpoint for residents and another for guests
   // the call will depend on the value of 'searchBy'. This will depending on the endpoint set setQueryResponseResidents() or setQueryResponseGuests()
   useEffect(() => {
     if (searchBy !== 'Guest') {
       const getQueryResults = async () => {
         try {
-          const response = await fetch(`http://127.0.0.1:8000/react/list/resident?search=${inputText}`, {
+          const response = await fetch(`https://guestentryapp.herokuapp.com/react/list/resident?search=${inputText}`, {
             headers: {
               'Content-Type': 'application/json',
               
-              'Authorization': 'Token 72e2f76284aa92d0d2eda68192c98072195eaf0c',
+              'Authorization': productionToken,
             }
           })
           if (response.ok) {
@@ -145,10 +146,10 @@ function App() {
     } else {
       const getQueryResults = async () => {
         try {
-          const response = await fetch(`http://127.0.0.1:8000/react/list/guest?search=${inputText}`, {
+          const response = await fetch(`https://guestentryapp.herokuapp.com/react/list/guest?search=${inputText}`, {
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': 'Token 72e2f76284aa92d0d2eda68192c98072195eaf0c',
+              'Authorization': productionToken,
             }
           })
           if (response.ok) {
@@ -178,10 +179,10 @@ function App() {
   // this function will get all the guest for that residents house;
   const getGuestsForAddress = async (address) => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/react/list/guest?search=${address}`, {
+      const response = await fetch(`https://guestentryapp.herokuapp.com/react/list/guest?search=${address}`, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Token 72e2f76284aa92d0d2eda68192c98072195eaf0c',
+          'Authorization': productionToken,
         }
       })
       if (response.ok) {
@@ -270,13 +271,13 @@ function App() {
   // will make a POST request to the data base using the data gathered with getGuestInfoClick()
   const createGuestLog = async (guestData) => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/react/create/guestlog/", {
+      const response = await fetch("https://guestentryapp.herokuapp.com/react/create/guestlog/", {
         method: 'POST',
         body: JSON.stringify(guestData),
         headers: {
           'Content-Type': 'application/json',
           'Transfer-Encoding': 'chunked',
-          'Authorization': 'Token 72e2f76284aa92d0d2eda68192c98072195eaf0c',
+          'Authorization': productionToken,
         }
       })
 

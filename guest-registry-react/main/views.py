@@ -63,15 +63,19 @@ class GuestLogAPICreateView(generics.CreateAPIView):
         resident_to_notify = Resident.objects.filter(
             address__iexact=residents_to_notify_info['address_to_visit'])
 
+        residents_to_notify_info.update(
+            {'special_note': request.data['special_note']})
+
         for resident in resident_to_notify:
-            list_of_emails.append(resident.email)
+            list_of_emails.append(resident.email)                          ## could instead send the email from this loop
 
-        if request.data['special_note']:
-            residents_to_notify_info.update(
-                {'special_note': request.data['special_note']})
-        else:
-            residents_to_notify_info.update({'special_note': ''})
 
+        #for resident in resident_to_notify:
+        #    send_mail(subject=subject,
+        #              message=message,
+        #              from_email=settings.EMAIL_HOST_USER,
+        #              recipient_list=list_of_emails)
+        # fix the variables to send the email
         return response
     
 

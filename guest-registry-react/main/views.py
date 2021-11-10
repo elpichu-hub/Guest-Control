@@ -68,7 +68,6 @@ class GuestLogAPICreateView(generics.CreateAPIView):
             # could instead send the email from this loop
             list_of_emails.append(resident.email)
 
-
         ## put the send_email func inside of this function to be able to call it from the thread
         def send_emails_function_for_thread():
             try:

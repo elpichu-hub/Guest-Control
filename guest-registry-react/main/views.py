@@ -7,6 +7,8 @@ from django.core.mail import send_mail
 from datetime import datetime
 
 
+import threading
+import time
 
 
 # react version
@@ -67,17 +69,29 @@ class GuestLogAPICreateView(generics.CreateAPIView):
             {'special_note': request.data['special_note']})
 
         for resident in resident_to_notify:
-            list_of_emails.append(resident.email)                          ## could instead send the email from this loop
+            # could instead send the email from this loop
+            list_of_emails.append(resident.email)
 
-
-        #for resident in resident_to_notify:
+        # for resident in resident_to_notify:
         #    send_mail(subject=subject,
         #              message=message,
         #              from_email=settings.EMAIL_HOST_USER,
         #              recipient_list=list_of_emails)
         # fix the variables to send the email
+
+        def send_emails_function_for_thread():
+            for resident in resident_to_notify:
+                send_mail(subject=subject,
+                          message=message,
+                          from_email=settings.EMAIL_HOST_USER,
+                          recipient_list=list_of_emails)
+
+        thread = threading.Thread(target=test)
+        print('before started the thread')
+        thread.start()
+        print('after starting the thread')
         return response
-    
+
 
 class GuestLogAPIListView(generics.ListAPIView):
     permission_classes = (IsAuthenticated, )

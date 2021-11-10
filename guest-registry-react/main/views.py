@@ -69,9 +69,7 @@ class GuestLogAPICreateView(generics.CreateAPIView):
             # could instead send the email from this loop
             list_of_emails.append(resident.email)
 
-        subject = f"""
-            {residents_to_notify_info['visitor_first_name']} {residents_to_notify_info['visitor_last_name']} Allowed In.
-        """
+        subject = f"""{residents_to_notify_info['visitor_first_name']} {residents_to_notify_info['visitor_last_name']} Allowed In."""
         message = f"""
            Please be advised that on {residents_to_notify_info['date_and_time']}, {residents_to_notify_info['visitor_first_name']}
             {residents_to_notify_info['visitor_last_name']} was allowed into your property.  Please call us at 0000000000 if you have any questions.

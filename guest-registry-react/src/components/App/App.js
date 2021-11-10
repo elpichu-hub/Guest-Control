@@ -122,7 +122,7 @@ function App() {
           const response = await fetch(`https://guestentryapp.herokuapp.com/react/list/resident?search=${inputText}`, {
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': 'Token 72e2f76284aa92d0d2eda68192c98072195eaf0c',
+              'Authorization': productionToken,
             }
           })
           if (response.ok) {

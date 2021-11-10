@@ -69,12 +69,20 @@ class GuestLogAPICreateView(generics.CreateAPIView):
             # could instead send the email from this loop
             list_of_emails.append(resident.email)
 
-
+        subject = f"""
+            {residents_to_notify_info['visitor_first_name']} {residents_to_notify_info['visitor_last_name']} Allowed In.
+        """
+        message = f"""
+           Please be advised that on {residents_to_notify_info['date_and_time']}, {residents_to_notify_info['visitor_first_name']}
+            {residents_to_notify_info['visitor_last_name']} was allowed into your property.  Please call us at 0000000000 if you have any questions.
+            Thanks
+        """
+        print(message)
         ## put the send_email func inside of this function to be able to call it from the thread
         def send_emails_function_for_thread():
             try:
-                send_mail(subject='subject',
-                      message='message',
+                send_mail(subject=subject,
+                      message=message,
                       from_email=settings.EMAIL_HOST_USER,
                       recipient_list=list_of_emails)
                 print('email sent')
@@ -82,7 +90,7 @@ class GuestLogAPICreateView(generics.CreateAPIView):
                 send_mail(subject='Guest Registry Error',
                       message='Guest Registry Error',
                       from_email=settings.EMAIL_HOST_USER,
-                      recipient_list=['etubrute56@gmail.com'])
+                      recipient_list=[settings.EMAIL_HOST_USER])
                 print('Error Report Sent Admin.')
 
         ## this next line of code will create a thread which will send an email after logging a guest. if done traditionally

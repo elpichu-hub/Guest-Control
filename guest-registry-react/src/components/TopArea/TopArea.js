@@ -1,10 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import PopUpOnHover from '../PopUpOnHover/PopUpOnHover';
 import './TopArea.css';
 
 
 
 
 const TopArea = ({ inputText, handleTextOnChange, handleSearchBy, searchBy }) => {
+
+    const [isPopUpGuestShown, setIsPopUpGuestShown] = useState(false)
+    const [isPopUpResidentShown, setIsPopUpResidentShown] = useState(false)
 
     const handleOnLoad = () => {
         document.getElementById('input-for-search').focus();
@@ -17,7 +21,9 @@ const TopArea = ({ inputText, handleTextOnChange, handleSearchBy, searchBy }) =>
     return (
         <>
             <div className='TopArea'>
-                <div className='QueryResidents'>
+                <div
+                    onMouseEnter={() => setIsPopUpResidentShown(true)}
+                    onMouseLeave={() => setIsPopUpResidentShown(false)}>
                     <button type="button"
                         className="btn btn-secondary"
                         style={
@@ -26,6 +32,11 @@ const TopArea = ({ inputText, handleTextOnChange, handleSearchBy, searchBy }) =>
                                 { backgroundColor: 'grey' }
                         }
                         onClick={handleSearchBy}>Search Resident</button>
+
+                    {isPopUpResidentShown && < PopUpOnHover message={
+                        'Search Residents by First Name, Last Name, Address or Phone Number.'
+                    } styles={{ maxWidth: 132 }} />}
+
                 </div>
 
                 <div>
@@ -34,7 +45,9 @@ const TopArea = ({ inputText, handleTextOnChange, handleSearchBy, searchBy }) =>
                         value={inputText} onChange={handleTextOnChange} autoComplete="off" />
                 </div>
                 <div>
-                    <div className='QueryGuests'>
+                    <div className='QueryGuests'
+                        onMouseEnter={() => setIsPopUpGuestShown(true)}
+                        onMouseLeave={() => setIsPopUpGuestShown(false)}>
                         <button type="button"
                             className="btn btn-secondary"
                             style={
@@ -42,7 +55,12 @@ const TopArea = ({ inputText, handleTextOnChange, handleSearchBy, searchBy }) =>
                                     { backgroundColor: 'green' } :
                                     { backgroundColor: 'grey' }
                             }
-                            onClick={handleSearchBy}>Search Guest</button>
+                            onClick={handleSearchBy}
+                        >Search Guest</button>
+                        {isPopUpGuestShown && < PopUpOnHover message={
+                            'Search Guests in the guest list by first name, last name or address visiting.'
+                        } styles={{maxWidth: 132}} />}
+
                     </div>
                 </div>
 

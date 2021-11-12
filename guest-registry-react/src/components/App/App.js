@@ -214,7 +214,7 @@ function App() {
         last_name: '',
         first_name: '',
         special_note: '',
-        
+
       }
       console.log(data)
       setGuestData(data)
@@ -303,7 +303,7 @@ function App() {
       setShowForm(false);
       setShowGuestLogMessage(true)
       createGuestLog(guestData);
-      
+
       setInputText('')
 
       document.getElementById('input-for-search').focus()

@@ -11,6 +11,7 @@ const GuestLog = () => {
     const [guestLogs, setGuestLogs] = useState({})
     const [guestLogsCustom, setGuestLogsCustom] = useState('')
     const [showTable, setShowTable] = useState(false)
+    const [isPopUpGuestLogsShow, setIsPopUpGuestLogsShow] = useState(false); 
 
     const developmentToken = 'Token 72e2f76284aa92d0d2eda68192c98072195eaf0c';
     const productionToken = 'Token 09f3a37a78991b0a86ccd07329f991d908b0ce5e';

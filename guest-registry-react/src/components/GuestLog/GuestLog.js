@@ -8,20 +8,12 @@ import PopUpOnHover from '../PopUpOnHover/PopUpOnHover';
 const GuestLog = () => {
 
 
-<<<<<<< HEAD
     const [guestLogs, setGuestLogs] = useState({})
     const [guestLogsCustom, setGuestLogsCustom] = useState('')
     const [showTable, setShowTable] = useState(false)
 
     const developmentToken = 'Token 72e2f76284aa92d0d2eda68192c98072195eaf0c';
     const productionToken = 'Token 09f3a37a78991b0a86ccd07329f991d908b0ce5e';
-=======
-    const [guestLogs, setGuestLogs] = useState({});
-    const [guestLogsCustom, setGuestLogsCustom] = useState('');
-    const [showTable, setShowTable] = useState(false);                           // this state will toggle the table for the guestlogs history                      
-    const [isPopUpGuestLogsShow, setIsPopUpGuestLogsShow] = useState(false);     // will show pop up when hovering over a button to explain what it is for
-
->>>>>>> development
 
     useEffect(() => {
         const getGuestLogCustomized = async () => {
@@ -29,11 +21,7 @@ const GuestLog = () => {
                 const response = await fetch(`https://guestentryapp.herokuapp.com/react/list/guestlog?search=${guestLogsCustom}`, {
                     headers: {
                         'Content-Type': 'application/json',
-<<<<<<< HEAD
                         'Authorization': productionToken,
-=======
-                        'Authorization': 'Token 72e2f76284aa92d0d2eda68192c98072195eaf0c',
->>>>>>> development
                     }
                 });
                 if (response.ok) {
@@ -58,11 +46,7 @@ const GuestLog = () => {
             const response = await fetch(`https://guestentryapp.herokuapp.com/react/list/guestlog?search=${guestLogsCustom}`, {
                 headers: {
                     'Content-Type': 'application/json',
-<<<<<<< HEAD
                     'Authorization': productionToken,
-=======
-                    'Authorization': 'Token 72e2f76284aa92d0d2eda68192c98072195eaf0c',
->>>>>>> development
                 }
             });
             if (response.ok) {
@@ -87,8 +71,6 @@ const GuestLog = () => {
 
     return (
         <div className='tableDivision'>
-
-
             <div
                 onMouseEnter={() => setIsPopUpGuestLogsShow(true)}
                 onMouseLeave={() => setIsPopUpGuestLogsShow(false)}>

@@ -1,7 +1,8 @@
 import './GuestLogTable.css';
 
 
-const GuestLogTable = ({guestLogs}) => {
+const GuestLogTable = ({ guestLogs }) => {
+    
     return (
         <div className='GuestLogTable'>
             <table>
@@ -16,7 +17,6 @@ const GuestLogTable = ({guestLogs}) => {
                 </tr>
                 {Object.values(guestLogs).map((log, index) => (
                     <tr key={index}>
-                                   
                         <td>{log.first_name}</td>
                         <td>{log.last_name}</td>
                         <td>{log.address}</td>

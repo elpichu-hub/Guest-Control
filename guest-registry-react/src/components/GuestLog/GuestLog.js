@@ -71,28 +71,31 @@ const GuestLog = () => {
 
 
     return (
-        <div className='tableDivision'>
-            <div
-                onMouseEnter={() => setIsPopUpGuestLogsShow(true)}
-                onMouseLeave={() => setIsPopUpGuestLogsShow(false)}>
-                <button type="button" className="btn btn-secondary"
-                    onClick={getGuestLogCustomizedClick}
+        <>
+            <div className='tableButtonAndInput'>
+                <div
+                    onMouseEnter={() => setIsPopUpGuestLogsShow(true)}
+                    onMouseLeave={() => setIsPopUpGuestLogsShow(false)}>
+                    <button type="button" className="btn btn-secondary"
+                        onClick={getGuestLogCustomizedClick}
 
-                    id='showTableButton'>Show Guest Logs</button>
-                {isPopUpGuestLogsShow && <PopUpOnHover message={
-                    'Look at the history of guests allowed into the property. You can search for vehicle, plate, first and last name or address visited.'
-                } styles={{maxWidth: 240}} />}
+                        id='showTableButton'>Show Guest Logs</button>
+                    {isPopUpGuestLogsShow && <PopUpOnHover message={
+                        'Look at the history of guests allowed into the property. You can search for vehicle, plate, first and last name or address visited.'
+                    } styles={{ maxWidth: 240 }} />}
+                </div>
+
+                <div>
+                    <input value={guestLogsCustom} onChange={(e) => { handleOnChangeForGuestLogs(e) }}
+                        id='logsInput' placeholder='Search By..' autoComplete="off" />
+                </div>
+
+
             </div>
-
-
-            <div>
-                <input value={guestLogsCustom} onChange={(e) => { handleOnChangeForGuestLogs(e) }}
-                    id='logsInput' placeholder='Search By..' />
+            <div class='Table'>
+                {showTable ? <GuestLogTable guestLogs={guestLogs} /> : null}
             </div>
-
-            {showTable ? <GuestLogTable guestLogs={guestLogs} /> : null}
-        </div>
-
+        </>
     )
 };
 

@@ -60,18 +60,20 @@ function App() {
   // this will create a message for ui
   const [successOrFailureMessage, setSuccessOrFailureMessage] = useState('')
 
-  // this will show the message created by 'setSuccessOrFailureMessage'
+  // this will show the message created by 'setSuccessOrFailureMessage' when a guestlog is created or attempted to
   const [showGuestLogMessage, setShowGuestLogMessage] = useState(false)
 
 
 
-  //this will set the search
+  //this will set the searchBy state
+  /*if switching from 'Search Guest' to 'Search Resident' or vice versa this will clear any text input state &
+  address to log new resident state*/
   const handleSearchBy = (e) => {
     if (e.target.innerHTML === 'Search Resident') {
 
-      setInputText('')                                                      
-      setSearchBy('Resident')                                               
-      setAddressToLogNewGuest('')                                           
+      setInputText('')
+      setSearchBy('Resident')
+      setAddressToLogNewGuest('')
       setShowGuestsForHouse(false)
       setShowGuests(false)
 

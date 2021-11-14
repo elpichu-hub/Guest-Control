@@ -71,7 +71,7 @@ function App() {
       setAddressToLogNewGuest('')
       setShowGuestsForHouse(false)
       setShowGuests(false)
-      console.log('Gonna Be searching By Resident')
+      console.log('Search Residents')
       document.getElementById('input-for-search').focus()
 
     } else {
@@ -80,6 +80,7 @@ function App() {
       setSearchBy('Guest')
       setShowResidents(false)
       setShowGuestsForHouse(false)
+      console.log('Search Guests')
       document.getElementById('input-for-search').focus()
 
     }
@@ -104,10 +105,10 @@ function App() {
   };
 
 
-  // if 'searchBy or inputText' and inputText === true, getQueryResults() will be called, there is endpoint for residents and another for guests
-  // the call will depend on the value of 'searchBy'. This will depending on the endpoint set setQueryResponseResidents() or setQueryResponseGuests()
+  /* if 'searchBy or inputText' and inputText === true, getQueryResults() will be called, there are endpoints for residents and another for guests
+   the call will depend on the value of 'searchBy'. */
   useEffect(() => {
-    if (searchBy !== 'Guest') {
+    if (searchBy === 'Resident') {
       const getQueryResults = async () => {
         try {
           const response = await fetch(`http://127.0.0.1:8000/react/list/resident?search=${inputText}`, {
@@ -130,8 +131,7 @@ function App() {
       if (inputText) {
         getQueryResults()
       } else {
-        console.log('no text')
-        setQueryResponseResidents({})
+        console.log('No input to search by!')
       }
     } else {
       const getQueryResults = async () => {
@@ -156,14 +156,10 @@ function App() {
       if (inputText) {
         getQueryResults()
       } else {
-        console.log('no text')
-        setQueryResponseGuests({})
+        console.log('No input to search by!')
       }
     }
   }, [inputText, searchBy])
-
-
-
 
 
   // this function will get all the guest for that residents house;
@@ -173,7 +169,7 @@ function App() {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Token 72e2f76284aa92d0d2eda68192c98072195eaf0c',
-          
+
         }
       })
       if (response.ok) {

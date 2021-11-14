@@ -168,9 +168,6 @@ function App() {
   }, [inputText, searchBy])
 
 
-
-
-
   // this function will get all the guest for that residents house;
   const getGuestsForAddress = async (address) => {
     try {

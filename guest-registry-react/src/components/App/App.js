@@ -76,7 +76,7 @@ function App() {
       setAddressToLogNewGuest('')
       setShowGuestsForHouse(false)
       setShowGuests(false)
-      console.log('Gonna Be searching By Resident')
+      console.log('Search Residents')
       document.getElementById('input-for-search').focus()
 
     } else {
@@ -85,6 +85,7 @@ function App() {
       setSearchBy('Guest')
       setShowResidents(false)
       setShowGuestsForHouse(false)
+      console.log('Search Guests')
       document.getElementById('input-for-search').focus()
 
     }
@@ -109,10 +110,10 @@ function App() {
   };
 
 
-  // if 'searchBy or inputText' and inputText === true, getQueryResults() will be called, there is endpoint for residents and another for guests
-  // the call will depend on the value of 'searchBy'. This will depending on the endpoint set setQueryResponseResidents() or setQueryResponseGuests()
+  /* if 'searchBy or inputText' and inputText === true, getQueryResults() will be called, there are endpoints for residents and another for guests
+   the call will depend on the value of 'searchBy'. */
   useEffect(() => {
-    if (searchBy !== 'Guest') {
+    if (searchBy === 'Resident') {
       const getQueryResults = async () => {
         try {
           const response = await fetch(`https://guestentryapp.herokuapp.com/react/list/resident?search=${inputText}`, {
@@ -135,8 +136,7 @@ function App() {
       if (inputText) {
         getQueryResults()
       } else {
-        console.log('no text')
-        setQueryResponseResidents({})
+        console.log('No input to search by!')
       }
     } else {
       const getQueryResults = async () => {
@@ -161,8 +161,7 @@ function App() {
       if (inputText) {
         getQueryResults()
       } else {
-        console.log('no text')
-        setQueryResponseGuests({})
+        console.log('No input to search by!')
       }
     }
   }, [inputText, searchBy])

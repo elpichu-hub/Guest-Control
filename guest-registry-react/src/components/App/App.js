@@ -71,20 +71,20 @@ function App() {
       setAddressToLogNewGuest('')
       setShowGuestsForHouse(false)
       setShowGuests(false)
-
       console.log('Gonna Be searching By Resident')
       document.getElementById('input-for-search').focus()
+
     } else {
 
       setInputText('')
       setSearchBy('Guest')
-
       setShowResidents(false)
       setShowGuestsForHouse(false)
-
       document.getElementById('input-for-search').focus()
+
     }
   };
+
 
   //This will make sure to refocus to the search input after 4 seconds of not being unless at the form view
   useEffect(() => {
@@ -97,19 +97,11 @@ function App() {
   })
 
 
-  // When the searchBy state changes the inputText that defines searchBy will refresh to empty space
-  useEffect(() => {
-    setInputText('')
-  }, [searchBy])
-
-
-
-  // This will set the text to searchBy, it is "attached" to a onChange on the input Element
+  // Everytime you type into input at 'TopArea', inputText state is getting set
+  // inputText will be used to query the database based on what you typed
   const handleTextOnChange = (e) => {
     setInputText(e.target.value)
   };
-
-
 
 
   // if 'searchBy or inputText' and inputText === true, getQueryResults() will be called, there is endpoint for residents and another for guests

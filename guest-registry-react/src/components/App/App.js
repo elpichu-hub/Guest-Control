@@ -89,10 +89,10 @@ function App() {
   //This will make sure to refocus to the search input after 4 seconds of not being unless at the form view
   useEffect(() => {
     const focusOnInput = setInterval(() => {
-      if (!document.activeElement.id && !showForm) {
+      if (!showForm) {
         document.getElementById('input-for-search').focus()
       }
-    }, 20000)
+    }, 2000)
     return () => clearInterval(focusOnInput)
   })
 

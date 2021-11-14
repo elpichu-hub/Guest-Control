@@ -11,18 +11,18 @@ const GuestLog = () => {
     const [guestLogs, setGuestLogs] = useState({})
     const [guestLogsCustom, setGuestLogsCustom] = useState('')
     const [showTable, setShowTable] = useState(false)
-    const [isPopUpGuestLogsShow, setIsPopUpGuestLogsShow] = useState(false); 
+    const [isPopUpGuestLogsShow, setIsPopUpGuestLogsShow] = useState(false);
 
-    const developmentToken = 'Token 72e2f76284aa92d0d2eda68192c98072195eaf0c';
-    const productionToken = 'Token 09f3a37a78991b0a86ccd07329f991d908b0ce5e';
 
+    // this will fetch all guestLogs if you select the button to show table 'Show Guest Logs' and you haven't
+    // typed anything in the input.
     useEffect(() => {
         const getGuestLogCustomized = async () => {
             try {
                 const response = await fetch(`https://guestentryapp.herokuapp.com/react/list/guestlog?search=${guestLogsCustom}`, {
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': productionToken,
+                        'Authorization': 'Token 09f3a37a78991b0a86ccd07329f991d908b0ce5e',
                     }
                 });
                 if (response.ok) {
@@ -41,13 +41,14 @@ const GuestLog = () => {
         }
     }, [guestLogsCustom, showTable])
 
-
+    // this is meant for more specific search for guestlogs. You type something in the input and when you click on 'Show Guest Logs' button
+    // it will return the data from data
     const getGuestLogCustomizedClick = async () => {
         try {
             const response = await fetch(`https://guestentryapp.herokuapp.com/react/list/guestlog?search=${guestLogsCustom}`, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': productionToken,
+                    'Authorization': 'Token 09f3a37a78991b0a86ccd07329f991d908b0ce5e',
                 }
             });
             if (response.ok) {
@@ -63,10 +64,12 @@ const GuestLog = () => {
     };
 
 
+    //when the input for guest logs history changes it will query base on what you type, that changed value is stored in setGuestLogsCuston
+    //at the same time it will show the table for guest logs.
     const handleOnChangeForGuestLogs = (e) => {
-        setGuestLogsCustom(e.target.value)                    // What is this??????????
+        setGuestLogsCustom(e.target.value)
         setShowTable(true)
-    }
+    };
 
 
 

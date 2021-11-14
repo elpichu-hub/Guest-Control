@@ -12,7 +12,7 @@ import time
 
 # react version
 
-
+##not using this view for now
 class HouseListAPIView(generics.ListAPIView):
     permission_classes = (IsAuthenticated, )
     queryset = House.objects.all()

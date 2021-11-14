@@ -46,7 +46,6 @@ function App() {
   resident's address */
   const [showGuestsForHouse, setShowGuestsForHouse] = useState(false)
 
-
   /* after clicking on a resident, then guest, if true the app will show the form
   to log a guest into that resident's address */
   const [showForm, setShowForm] = useState(false)
@@ -57,31 +56,35 @@ function App() {
   only take the address by using 'addressToLogNewGuest' State */
   const [guestData, setGuestData] = useState({})
 
+  // When a guestlog is created/Guest is logged, depending if there was an error or not,
+  // this will create a message for ui
   const [successOrFailureMessage, setSuccessOrFailureMessage] = useState('')
+
+  // this will show the message created by 'setSuccessOrFailureMessage'
   const [showGuestLogMessage, setShowGuestLogMessage] = useState(false)
 
 
 
-
+  //this will set the search
   const handleSearchBy = (e) => {
     if (e.target.innerHTML === 'Search Resident') {
 
-      setInputText('')
-      setSearchBy('Resident')
-      setAddressToLogNewGuest('')
+      setInputText('')                                                      
+      setSearchBy('Resident')                                               
+      setAddressToLogNewGuest('')                                           
       setShowGuestsForHouse(false)
       setShowGuests(false)
 
-      console.log('Gonna Be searching By Resident')
+      console.log('searching By Resident')
       document.getElementById('input-for-search').focus()
     } else {
 
       setInputText('')
       setSearchBy('Guest')
-
       setShowResidents(false)
       setShowGuestsForHouse(false)
 
+      console.log('searching By Resident')
       document.getElementById('input-for-search').focus()
     }
   };
@@ -111,8 +114,6 @@ function App() {
 
 
 
-  const developmentToken = 'Token 72e2f76284aa92d0d2eda68192c98072195eaf0c';
-  const productionToken = 'Token 09f3a37a78991b0a86ccd07329f991d908b0ce5e';
   // if 'searchBy or inputText' and inputText === true, getQueryResults() will be called, there is endpoint for residents and another for guests
   // the call will depend on the value of 'searchBy'. This will depending on the endpoint set setQueryResponseResidents() or setQueryResponseGuests()
   useEffect(() => {
@@ -122,7 +123,7 @@ function App() {
           const response = await fetch(`https://guestentryapp.herokuapp.com/react/list/resident?search=${inputText}`, {
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': productionToken,
+              'Authorization': 'Token 09f3a37a78991b0a86ccd07329f991d908b0ce5e',
             }
           })
           if (response.ok) {
@@ -148,7 +149,7 @@ function App() {
           const response = await fetch(`https://guestentryapp.herokuapp.com/react/list/guest?search=${inputText}`, {
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': productionToken,
+              'Authorization': 'Token 09f3a37a78991b0a86ccd07329f991d908b0ce5e',
             }
           })
           if (response.ok) {
@@ -181,7 +182,7 @@ function App() {
       const response = await fetch(`https://guestentryapp.herokuapp.com/react/list/guest?search=${address}`, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': productionToken,
+          'Authorization': 'Token 09f3a37a78991b0a86ccd07329f991d908b0ce5e',
         }
       })
       if (response.ok) {
@@ -262,7 +263,6 @@ function App() {
   // the intention of this is to make sure that showForm remains false
   useEffect(() => {
     setShowForm(false)
-    setSuccessOrFailureMessage('')
   }, [inputText, searchBy])
 
 
@@ -275,7 +275,7 @@ function App() {
         body: JSON.stringify(guestData),
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': productionToken,
+          'Authorization': 'Token 09f3a37a78991b0a86ccd07329f991d908b0ce5e',
         }
       })
 
@@ -303,13 +303,10 @@ function App() {
       setShowForm(false);
       setShowGuestLogMessage(true)
       createGuestLog(guestData);
-
       setInputText('')
-
       document.getElementById('input-for-search').focus()
 
     } else {
-
       if (!guestData.first_name) {
         setError(guestData.first_name);
       };
@@ -327,7 +324,6 @@ function App() {
       };
     };
   };
-
 
 
 

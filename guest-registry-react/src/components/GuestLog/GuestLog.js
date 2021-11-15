@@ -7,15 +7,22 @@ import PopUpOnHover from '../PopUpOnHover/PopUpOnHover';
 
 const GuestLog = () => {
 
-
+    // This state is going to be set after running getGuestLogCustomized()
     const [guestLogs, setGuestLogs] = useState({})
+
+    /* When you type something in the input at GuestLog Component, setGuestLogsCustom()
+        will run on a onChange event */
     const [guestLogsCustom, setGuestLogsCustom] = useState('')
+
+    // This state will show a table with guestLogs in it
     const [showTable, setShowTable] = useState(false)
+
+    /* This state is an explanation text that will show up when you hover over certain elements, 
+        of what some elements do, mainly buttons */
     const [isPopUpGuestLogsShow, setIsPopUpGuestLogsShow] = useState(false);
 
 
-    // this will fetch all guestLogs if you select the button to show table 'Show Guest Logs' and you haven't
-    // typed anything in the input.
+    
     useEffect(() => {
         const getGuestLogCustomized = async () => {
             try {

@@ -39,7 +39,8 @@ function App() {
   const [addressToLogNewGuest, setAddressToLogNewGuest] = useState('')
 
   /* when you select a resident, that resident's address will be used to call
-  getGuestsForAddress() and get all the residents in that resident's address */
+  getGuestsForAddress() and get all the residents in that resident's address this
+  state will be set there */
   const [queryResponseGuestsForHouse, setQueryResponseGuestsForHouse] = useState({})
 
   /* after selecting a resident, if true the app will show all the guests for that
@@ -108,6 +109,10 @@ function App() {
   /* if 'searchBy or inputText' and inputText === true, getQueryResults() will be called, there are endpoints for residents and another for guests
    the call will depend on the value of 'searchBy'. */
   useEffect(() => {
+
+    setShowForm(false)
+    setSuccessOrFailureMessage('')
+
     if (searchBy === 'Resident') {
       const getQueryResults = async () => {
         try {
@@ -162,14 +167,15 @@ function App() {
   }, [inputText, searchBy])
 
 
-  // this function will get all the guest for that residents house;
+  /* the address argument is obtained after looping through queryResultsResidents state at QueryResultsResidents
+   Component then showGuestsForHouseClick() will be on a onClick which will call this function */
+  // this function then will get all the guests for that addresss and set the state 'queryResponseGuestsForHouse'
   const getGuestsForAddress = async (address) => {
     try {
       const response = await fetch(`http://127.0.0.1:8000/react/list/guest?search=${address}`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Token 72e2f76284aa92d0d2eda68192c98072195eaf0c',
-
         }
       })
       if (response.ok) {
@@ -195,7 +201,12 @@ function App() {
     setQueryResponseResidents({})
   };
 
-  // creates the data object and pass it to Guest Data state
+
+  // creates the data object and pass it to guestData state
+  /* value is the info for that specif guest, if new guest
+   the value will only be the address visiting */
+  /* value will come from getGuestInfoClick() on a onClick
+  at QueryResultsGuestsForHouseContainer Component */
   const getGuestInfo = (value) => {
     if (!value) {
       const data = {
@@ -219,6 +230,7 @@ function App() {
     }
   };
 
+
   //This click will call getGuestInfo, clear the guests suggestions and will set showForm to true
   const getGuestInfoClick = (value) => {
     getGuestInfo(value)
@@ -226,12 +238,15 @@ function App() {
     setShowGuestsForHouse(false)
     setShowGuests(false)
     setShowForm(true)
-
   };
 
 
-
-
+  /* when creating a new log for a new guest not in the database, 
+  the only data you would have about it is
+  the address being visited, so when you run getGuestsForAddress() 
+  you will be setting 'addressToLogNewGuest' state, that address will
+  be used to create a new log under that address*/
+  // this function is bound to an onClick event on QueryResultsForHouse
   const logNewGuestNotInGuestListClick = () => {
     const data = {
       address: addressToLogNewGuest,
@@ -246,16 +261,11 @@ function App() {
   };
 
 
+  /* this function will make a POST request to the data
+   base using the data gathered with getGuestInfoClick() */
 
-  // the intention of this is to make sure that showForm remains false
-  useEffect(() => {
-    setShowForm(false)
-    setSuccessOrFailureMessage('')
-  }, [inputText, searchBy])
-
-
-
-  // will make a POST request to the data base using the data gathered with getGuestInfoClick()
+  /* After created the guestLog a success or failure message
+  will be set with setSuccessOrFailureMessage() */
   const createGuestLog = async (guestData) => {
     try {
       const response = await fetch("http://127.0.0.1:8000/react/create/guestlog/", {
@@ -263,11 +273,9 @@ function App() {
         body: JSON.stringify(guestData),
         headers: {
           'Content-Type': 'application/json',
-          'Transfer-Encoding': 'chunked',
           'Authorization': 'Token 72e2f76284aa92d0d2eda68192c98072195eaf0c',
         }
       })
-
       console.log(response)
       if (response.ok) {
         const jsonResponse = await response.json();
@@ -283,22 +291,16 @@ function App() {
   };
 
 
-
-  // will execute createGuestLog(). This func will be passed to GuestLogForm component. Will create an error in setError
-  // and pass it to guestlogForm to show missing fields if any when clicked
+  /* will execute createGuestLog(). This func will be passed to GuestLogForm component. Will create an error in setError
+   and pass it to guestlogForm to show missing fields if any when clicked */
   const createGuestLogClick = (guestData, setError) => {
-
     if (guestData.first_name && guestData.last_name && guestData.address && guestData.vehicle && guestData.plate) {
       setShowForm(false);
       setShowGuestLogMessage(true)
       createGuestLog(guestData);
-
       setInputText('')
-
       document.getElementById('input-for-search').focus()
-
     } else {
-
       if (!guestData.first_name) {
         setError(guestData.first_name);
       };
@@ -316,8 +318,6 @@ function App() {
       };
     };
   };
-
-
 
 
   return (
@@ -346,6 +346,7 @@ function App() {
 
         {showForm && <GuestLogForm guestData={guestData} createGuestLogClick={createGuestLogClick}
           setGuestData={setGuestData} />}
+
 
         <GuestLog addressToLogNewGuest={addressToLogNewGuest} />
       </div>

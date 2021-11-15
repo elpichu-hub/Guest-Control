@@ -13,7 +13,7 @@ const GuestLog = () => {
     const [showTable, setShowTable] = useState(false);                           // this state will toggle the table for the guestlogs history                      
     const [isPopUpGuestLogsShow, setIsPopUpGuestLogsShow] = useState(false);     // will show pop up when hovering over a button to explain what it is for
 
-
+    
     useEffect(() => {
         const getGuestLogCustomized = async () => {
             try {

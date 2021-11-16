@@ -96,7 +96,7 @@ function App() {
       }
     }, 2000)
     return () => clearInterval(focusOnInput)
-  })
+  }, [])
 
 
   // Everytime you type into input at 'TopArea', inputText state is getting set

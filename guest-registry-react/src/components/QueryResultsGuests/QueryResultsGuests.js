@@ -3,6 +3,9 @@ import QueryResultsGuestsForHouseContainer from '../QueryResultsGuestsForHouseCo
 
 
 
+// response comes from queryResults() at app.js, the response will be looped over
+// and for each item in the response a QueryResultsGuestsForHouseContainer will render
+// This will render when you query for guest under 'searchBy === Guest'
 const QueryResultsGuests = ({ getGuestInfoClick, response }) => {
     const overflowStyle = Object.keys(response).length;
     return (
@@ -14,6 +17,7 @@ const QueryResultsGuests = ({ getGuestInfoClick, response }) => {
         </div>
     )
 };
+
 
 
 

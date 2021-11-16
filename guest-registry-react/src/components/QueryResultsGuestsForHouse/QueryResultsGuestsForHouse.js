@@ -1,11 +1,12 @@
 import './QueryResultsGuestsForHouse.css';
 import QueryResultsGuestsForHouseContainer from '../QueryResultsGuestsForHouseContainer/QueryResultsGuestsForHouseContainer';
 
+
+
+// this component will render the guests for a specific resident's house after clicking on that resident
+// A LogNewGuest suggestions will render here className = 'addNewGuest'
 const QueryResultsGuestsForHouse = ({ getGuestInfoClick, response, logNewGuestNotInGuestListClick }) => {
-
     const overflowStyle = Object.keys(response).length;
-
-
     return (
         <div className='QueryResultsTopDiv' style={{ overflowY: overflowStyle > 8 ? 'scroll' : 'hidden' }} >
             <h5 className='addNewGuest' style={{ color: 'blue' }} onClick={() => logNewGuestNotInGuestListClick()}>
@@ -18,6 +19,8 @@ const QueryResultsGuestsForHouse = ({ getGuestInfoClick, response, logNewGuestNo
         </div>
     )
 };
+
+
 
 
 export default QueryResultsGuestsForHouse;

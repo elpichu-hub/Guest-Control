@@ -3,9 +3,9 @@ import QueryResultsResidentsContainer from '../QueryResultsResidentsContainer/Qu
 
 
 
-
+// This component will render QueryResultsResidentsContainer component which will render residents
+// based on filter data by the user on input
 const QueryResultsResidents = ({ showGuestsForHouseClick, queryResponseResidents }) => {
-
     const overflowStyle = Object.keys(queryResponseResidents).length;
     return (
         <div className='QueryResultsTopDiv' style={{ overflowY: overflowStyle > 9 ? 'scroll' : 'hidden' }} >
@@ -15,9 +15,9 @@ const QueryResultsResidents = ({ showGuestsForHouseClick, queryResponseResidents
             ))}
         </div>
     )
-
-
 };
+
+
 
 
 export default QueryResultsResidents;

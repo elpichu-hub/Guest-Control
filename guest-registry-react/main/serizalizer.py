@@ -14,6 +14,7 @@ class HouseSerializer(serializers.ModelSerializer):
 
         ]
 
+
 class ResidentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Resident
@@ -21,7 +22,6 @@ class ResidentSerializer(serializers.ModelSerializer):
             'resident_last_name', 'resident_first_name',
             'resident_phone', 'pin', 'address', 'email'
         ]
-
 
 
 class GuestSerializer(serializers.ModelSerializer):

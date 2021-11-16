@@ -5,13 +5,10 @@ from rest_framework.permissions import IsAuthenticated
 from django.conf import settings
 from django.core.mail import send_mail
 from datetime import datetime
-
-
 import threading
-import time
 
 
-# react version
+
 
 class HouseListAPIView(generics.ListAPIView):
     permission_classes = (IsAuthenticated, )
@@ -48,7 +45,7 @@ class GuestLogAPICreateView(generics.CreateAPIView):
 
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
-
+        
         residents_to_notify_info = {}
         list_of_emails = []
 
@@ -78,23 +75,24 @@ class GuestLogAPICreateView(generics.CreateAPIView):
             Thanks
         """
         print(message)
-        ## put the send_email func inside of this function to be able to call it from the thread
+        # put the send_email func inside of this function to be able to call it from the thread
+
         def send_emails_function_for_thread():
             try:
                 send_mail(subject=subject,
-                      message=message,
-                      from_email=settings.EMAIL_HOST_USER,
-                      recipient_list=list_of_emails)
+                          message=message,
+                          from_email=settings.EMAIL_HOST_USER,
+                          recipient_list=list_of_emails)
                 print('email sent')
             except Exception:
                 send_mail(subject='Guest Registry Error',
-                      message='Guest Registry Error',
-                      from_email=settings.EMAIL_HOST_USER,
-                      recipient_list=[settings.EMAIL_HOST_USER])
+                          message='Guest Registry Error',
+                          from_email=settings.EMAIL_HOST_USER,
+                          recipient_list=[settings.EMAIL_HOST_USER])
                 print('Error Report Sent Admin.')
 
-        ## this next line of code will create a thread which will send an email after logging a guest. if done traditionally
-        ## it would affect the ui for about 10 secs, which is a lot of time. This is working fine.
+        # this next line of code will create a thread which will send an email after logging a guest. if done traditionally
+        # it would affect the ui for about 10 secs, which is a lot of time. This is working fine.
         thread = threading.Thread(target=send_emails_function_for_thread)
         print('before started the thread')
         thread.start()

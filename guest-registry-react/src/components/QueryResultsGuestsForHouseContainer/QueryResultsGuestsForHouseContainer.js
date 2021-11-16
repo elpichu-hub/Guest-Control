@@ -1,6 +1,8 @@
 import './QueryResultsGuestsForHouseContainer.css';
 
 
+
+// This Component will render guests for a specific house.
 const QueryResultsGuestsForHouseContainer = ({ getGuestInfoClick, value }) => {
     return (
         <>
@@ -11,10 +13,11 @@ const QueryResultsGuestsForHouseContainer = ({ getGuestInfoClick, value }) => {
                         ${value.address_visiting}`}</p>
                 </div>
             }
-
         </>
     )
 };
+
+
 
 
 export default QueryResultsGuestsForHouseContainer;

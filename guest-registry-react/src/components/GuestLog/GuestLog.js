@@ -22,7 +22,8 @@ const GuestLog = () => {
     const [isPopUpGuestLogsShow, setIsPopUpGuestLogsShow] = useState(false);
 
 
-    
+    // this function will fetch all the guestlogs, you can filter through 'guestLogsCustom' state
+    // this will excecute by clicking on the 'showTableButton' or by typing in the 'logsInput' input
     useEffect(() => {
         const getGuestLogCustomized = async () => {
             try {
@@ -41,15 +42,16 @@ const GuestLog = () => {
             } catch (error) {
                 console.log(error)
             }
-
         };
         if (showTable) {
             getGuestLogCustomized()
         }
     }, [guestLogsCustom, showTable])
 
-    // this is meant for more specific search for guestlogs. You type something in the input and when you click on 'Show Guest Logs' button
-    // it will return the data from data
+
+    /* This function is the same as getGuestLogCustomized, it was put here 
+        because could not reuse getGuestLogCustomized() since it is inside a 
+        useEffect hook */
     const getGuestLogCustomizedClick = async () => {
         try {
             const response = await fetch(`https://guestentryapp.herokuapp.com/react/list/guestlog?search=${guestLogsCustom}`, {
@@ -67,8 +69,7 @@ const GuestLog = () => {
         } catch (error) {
             console.log(error)
         }
-
-    };
+    }; 
 
 
     //when the input for guest logs history changes it will query base on what you type, that changed value is stored in setGuestLogsCuston
@@ -83,12 +84,12 @@ const GuestLog = () => {
     return (
         <>
             <div className='tableButtonAndInput'>
+
                 <div
                     onMouseEnter={() => setIsPopUpGuestLogsShow(true)}
                     onMouseLeave={() => setIsPopUpGuestLogsShow(false)}>
                     <button type="button" className="btn btn-secondary"
                         onClick={getGuestLogCustomizedClick}
-
                         id='showTableButton'>Show Guest Logs</button>
                     {isPopUpGuestLogsShow && <PopUpOnHover message={
                         'Look at the history of guests allowed into the property. You can search for vehicle, plate, first and last name or address visited.'
@@ -100,8 +101,8 @@ const GuestLog = () => {
                         id='logsInput' placeholder='Search By..' autoComplete="off" />
                 </div>
 
-
             </div>
+            
             <div class='Table'>
                 {showTable ? <GuestLogTable guestLogs={guestLogs} /> : null}
             </div>

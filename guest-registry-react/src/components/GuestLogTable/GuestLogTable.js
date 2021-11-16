@@ -1,8 +1,10 @@
 import './GuestLogTable.css';
 
 
+
+
+// this component is the table that will show all the info for prior guest logs
 const GuestLogTable = ({ guestLogs }) => {
-    
     return (
         <div className='GuestLogTable'>
             <table>

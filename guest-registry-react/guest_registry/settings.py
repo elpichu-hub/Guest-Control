@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-nunj0n0m!u=tdz1h3z^z7-f#886k$1bbdz1yk=+bjg_3hsj%hr'
+SECRET_KEY = os.environ.get('SECRET_KEY_GUEST_REGISTRY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -136,6 +136,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -175,5 +176,6 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 django_heroku.settings(locals())

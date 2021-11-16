@@ -5,12 +5,10 @@ from rest_framework.permissions import IsAuthenticated
 from django.conf import settings
 from django.core.mail import send_mail
 from datetime import datetime
-
-
 import threading
 
 
-# react version
+
 
 ##not using this view for now
 class HouseListAPIView(generics.ListAPIView):
@@ -48,7 +46,7 @@ class GuestLogAPICreateView(generics.CreateAPIView):
 
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
-
+        
         residents_to_notify_info = {}
         list_of_emails = []
 

@@ -4,6 +4,7 @@ import './TopArea.css';
 
 
 
+
 // This componet is rendered at the top of the application and will handle most 
 // of the querying to look for residents and guests
 const TopArea = ({ inputText, handleTextOnChange, handleSearchBy, searchBy }) => {
@@ -78,6 +79,8 @@ const TopArea = ({ inputText, handleTextOnChange, handleSearchBy, searchBy }) =>
         </>
     )
 };
+
+
 
 
 export default TopArea

@@ -101,7 +101,6 @@ const GuestLogForm = ({ guestData, createGuestLogClick, setGuestData }) => {
     /* when GuestLogForm shows this effect will run and focus on the first name input
         then it will keep doing it everythree seconds if nothing is focused*/
     useEffect(() => {
-        document.getElementById('firstName').focus()
         const focusOnFormFistName = setInterval(() => {
             if (!document.activeElement.id) {
                 document.getElementById('firstName').focus()

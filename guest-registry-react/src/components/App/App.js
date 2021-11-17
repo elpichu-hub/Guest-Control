@@ -93,15 +93,18 @@ function App() {
   };
 
 
-  //This will make sure to refocus to the search input after 4 seconds of not being unless at the form view
+  //This will make sure to refocus to the search input after 3 seconds of not being unless at the form view
   useEffect(() => {
+    if (!showForm) {
+      document.getElementById('input-for-search').focus();
+    }
     const focusOnInput = setInterval(() => {
       if (!showForm) {
         document.getElementById('input-for-search').focus()
       }
-    }, 2000)
+    }, 3000)
     return () => clearInterval(focusOnInput)
-  }, [])
+  })
 
 
   // Everytime you type into input at 'TopArea', inputText state is getting set
@@ -115,8 +118,8 @@ function App() {
    the call will depend on the value of 'searchBy'. */
   useEffect(() => {
 
-    setShowForm(false)
-    setSuccessOrFailureMessage('')
+    //setShowForm(false)
+    //setSuccessOrFailureMessage('')
 
     if (searchBy === 'Resident') {
       const getQueryResults = async () => {
@@ -242,7 +245,10 @@ function App() {
 
     setShowGuestsForHouse(false)
     setShowGuests(false)
+
     setShowForm(true)
+    console.log('form should be true now')
+    console.log(showForm)
   };
 
 

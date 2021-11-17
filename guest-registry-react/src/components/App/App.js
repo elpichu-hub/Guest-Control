@@ -113,8 +113,8 @@ function App() {
    the call will depend on the value of 'searchBy'. */
   useEffect(() => {
 
-    //setShowForm(false)
-    //setSuccessOrFailureMessage('')
+    setShowForm(false)
+    setSuccessOrFailureMessage('')
 
     if (searchBy === 'Resident') {
       const getQueryResults = async () => {

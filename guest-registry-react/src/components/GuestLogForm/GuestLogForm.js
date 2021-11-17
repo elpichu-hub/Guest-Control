@@ -108,7 +108,7 @@ const GuestLogForm = ({ guestData, createGuestLogClick, setGuestData }) => {
             }
         }, 3000)
         return () => clearInterval(focusOnFormFistName)
-    }, [])
+    })
 
 
     return (
